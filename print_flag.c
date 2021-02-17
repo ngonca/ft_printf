@@ -12,6 +12,17 @@ void print_space(t_ft_printf *s)
 }
 void print_zero(t_ft_printf *s)
 {
+        if(s->format == 'p' && s->nb_zero != 0 && s->prefix == 0)
+        {       s->prefix = 1;
+                ft_putstr("0x");
+                s->nb_zero += 2;
+                if(s->flag_precision == 1 && s->save_p == 0)    
+                        ft_putstr("0");
+                if(s->nb_zero > 2)
+                        s->return_value += 2;
+                else
+                        s->return_value += s->nb_space;
+        }
 
           while(s->nb_zero > 0)
         {

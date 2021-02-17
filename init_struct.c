@@ -13,6 +13,7 @@ void    init_struct(t_ft_printf *s)
     s->flag_nb = 0;
     s->nb_space = 0;
     s->nb_zero = 0;
+    s->prefix = 0;
 
     s->detect_char = 0;
     s->save_p = NULL;

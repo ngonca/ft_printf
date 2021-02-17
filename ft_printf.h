@@ -47,7 +47,7 @@ typedef	struct	s_ft_printf
     int			pos;
     int         flag_nb;
     int         detect_char;
-
+    int         prefix;
     int             save_d;
     char            save_c;
     unsigned int    save_u;

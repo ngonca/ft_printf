@@ -9,9 +9,9 @@ int main ()
     int t = 50;
     int u = 10;
 
-      as = ft_printf("vrai : %0*.*d\n", 5, -5, 8);
+      as = ft_printf("vrai : %-.50d\n", INT_MIN);
    printf("return value : [%d]\n", as);
-      as = printf("faux : %0*.*d\n", 5, -5, 8);
+      as = printf("faux : %-.50d\n", INT_MIN);
     printf("return value : [%d]\n", as);
     
 

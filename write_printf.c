@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 10:52:54 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/01/16 12:12:30 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/02/17 16:01:52 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	ft_putnbr_fd(int n, int fd)
 			ft_putnbr_fd((n / 10), fd);
 		ft_putchar_fd(n % 10 + 48, fd);
 	}
-	else
-		write(fd, "-2147483648", 11);
+	/*else
+		write(fd, "-2147483648", 11);*/
 }
 void 	ft_putnbr_fd_u(unsigned int n, int fd)
 {

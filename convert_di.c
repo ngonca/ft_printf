@@ -21,12 +21,12 @@ int     convert( t_ft_printf *s)
 
        if(s->format == 'c')
             parse_c(s);
+
         if(s->flag_precision == 1 && s->nb_space != 0 && s->nb_zero != 0)
         {
             precision(s);
             return(print(s));
         }
-
         if(s->flag_nb != 0 || s->flag_negative != 0)
             parse_di(s, &s->nb_space);
         if(s->flag_zero != 0 )
@@ -36,6 +36,7 @@ int     convert( t_ft_printf *s)
 
 void    parse_di(t_ft_printf *s, int *nb)
 {
+
 
     if(s->flag_zero != 0 && s->save_d < 0 && s->format != 'x' && s->format != 'X')
         revers_nb(s);
@@ -49,6 +50,9 @@ void    parse_di(t_ft_printf *s, int *nb)
 void    precision(t_ft_printf *s) 
 {
 
+        if(s->format == 'p' && s->nb_space > 2 && s->nb_zero != 0)
+                s->nb_space -= 2;
+        
         if (s->nb_zero < get_size(s))
             s->nb_space -= get_size(s);
         else
@@ -107,7 +111,7 @@ void    revers_nb(t_ft_printf *s)
                     s->nb_zero--;
                     if(s->flag_negative == 0) 
                print_space(s);
-                write(1, "-", 1);
+             //   write(1, "-", 1);
                 s->return_value++;
 }
 
@@ -115,9 +119,10 @@ void    revers_nb(t_ft_printf *s)
 int       format_exception(t_ft_printf *s)
 {
 
-
 if(s->flag_precision == 1 && s->detect_char == 1 && s->nb_zero < 0 && s->nb_space > 0)
     s->nb_zero = s->nb_space;
+
+ 
 
     if(s->format == 's' && s->flag_zero == 1 && s->flag_precision == 0)
     {
@@ -131,7 +136,7 @@ if(s->nb_zero > ft_strlen_int(s->save_d) && s->save_d == INT_MIN && (s->format =
 }
 if(s->flag_precision != 0 && s->save_p == 0 && s->nb_space > 2 && s->format == 'p')
 {
-    s->return_value--;
+   s->return_value--;
     s->nb_space++;
 }
 
@@ -164,10 +169,10 @@ if(s->flag_precision == 1 && s->save_p == NULL && s->format == 'p' && s->nb_spac
             s->return_value += s->nb_space;
             return(0);
     }
-    if(s->flag_precision == 1 && s->save_d == 0 && s->nb_zero == 0 && s->format != 'u' && s->format != 'p')
+    if(s->flag_precision == 1 && s->save_d == 0 && s->nb_zero == 0 && s->format != 'u' && s->format != 'p' && s->format != 'c')
         {
             s->return_value += s->nb_space;
-            return(0);
+           return(0);
         }
     return(1);
 }

@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 09:53:17 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/02/11 12:52:24 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/02/17 16:03:11 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ void	print_nb(t_ft_printf *s)
 		ft_putchar_fd(s->save_c, 1);
 	if(s->format == 'p')
 	{
-	
+			if(s->prefix == 0)
 			ft_putstr("0x");
 			if( s->save_p != 0 || s->flag_precision == 0)
 			ft_putnbr_base_l((unsigned long)s->save_p, "0123456789abcdef", 16);
