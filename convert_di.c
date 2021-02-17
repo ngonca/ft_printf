@@ -2,7 +2,7 @@
 
 int     convert( t_ft_printf *s)
 {
-  if(!(format_exception(s)))
+ if(!(format_exception(s)))
         return(0);
 
         if(s->flag_precision == 1 && s->format != 's')
@@ -115,9 +115,15 @@ void    revers_nb(t_ft_printf *s)
 int       format_exception(t_ft_printf *s)
 {
 
-/*if(s->nb_zero < 0 && s->nb_space > 0)
-    s->flag_zero =1;*/
-debug_struct(s, 0);
+
+if(s->flag_precision == 1 && s->detect_char == 1 && s->nb_zero < 0 && s->nb_space > 0)
+    s->nb_zero = s->nb_space;
+
+    if(s->format == 's' && s->flag_zero == 1 && s->flag_precision == 0)
+    {
+        s->flag_zero = 0;
+        s->nb_zero = 0;
+    }
 if(s->nb_zero > ft_strlen_int(s->save_d) && s->save_d == INT_MIN && (s->format == 'd' || s->format == 'i'))
 {
     s->nb_zero++;
@@ -129,7 +135,8 @@ if(s->flag_precision != 0 && s->save_p == 0 && s->nb_space > 2 && s->format == '
     s->nb_space++;
 }
 
-if(s->nb_space == 0 && s->nb_zero == 0 && s->flag_zero == 1)
+
+if(s->nb_space == 0 && s->nb_zero == 0 && s->flag_zero == 1 && s->flag_precision == 1)
     s->flag_zero = 0;
 if(s->format == 's' && s->nb_zero < 0 && s->nb_space != 0)
 {
@@ -167,7 +174,9 @@ if(s->flag_precision == 1 && s->save_p == NULL && s->format == 'p' && s->nb_spac
 
 int     precision_string(t_ft_printf *s)
 {
-    
+debug_struct(s, 0);
+    if(s->nb_zero <= get_size(s) && s->nb_space > 0 && s->nb_space < s->nb_zero && s->flag_asterix == 0)
+        s->return_value += s->nb_zero - s->nb_space;
     s->return_value += s->nb_space;
     if(s->nb_space < get_size(s) && s->nb_zero > get_size(s))
         s->return_value += get_size(s) - s->nb_space;
@@ -198,7 +207,7 @@ int     precision_string(t_ft_printf *s)
 
 void    parse_c(t_ft_printf *s)
 {
-    
+
     if(s->nb_space == 0 && s->nb_zero != 0 && s->flag_zero == 1 && s->flag_precision == 1)
     {
         s->nb_zero = 0;
@@ -209,6 +218,7 @@ void    parse_c(t_ft_printf *s)
             s->return_value--;
         s->nb_zero = 0;
     }
+
     if(s->detect_char == 1 && s->nb_space != 0)
     {
     

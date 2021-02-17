@@ -16,8 +16,8 @@ int     parse_flag(const char *str, t_ft_printf *s, va_list *a)
         }
        if(str[s->pos] == '-')
         {   
-            s->flag_negative = 1;
             s->pos++;
+            s->flag_negative = 1;
               if(str[s->pos] == '*')
                     s->nb_space = va_arg(*a, int);
             else
@@ -25,24 +25,28 @@ int     parse_flag(const char *str, t_ft_printf *s, va_list *a)
         }
          if(str[s->pos] == '0')
         {
-            s->flag_zero = 1;
+                s->flag_zero = 1;
                 if(str[s->pos + 1] == '*')
                     s->nb_zero = va_arg(*a, int);
                 else
                     s->nb_zero = ft_atoi(&str[s->pos]);
                 s->detect_char = 1;
             s->pos++;
-        }    
+        }
+         if(s->flag_zero == 1 && s->flag_negative == 1)
+         {
+            s->flag_zero = 0;
+            s->nb_zero = 0;
+            s->detect_char = 0;
+         }
+  
        if(str[s->pos] == '*')
             s->pos++;
    while ((str[s->pos] >= '0' && str[s->pos] <= '9'))
             s->pos++;
         if(str[s->pos] == '.')
-        {
             parse_precision(str, s, a);
-        }
-
-        if(!(check_error(s, str)) && str[s->pos] != '\0')
+            if(!(check_error(s, str)) && str[s->pos] != '\0')
             return(0);
     }
 
@@ -80,6 +84,8 @@ if(s->flag_zero != 0 && s->nb_zero != 0)
         s->pos++;
     while (str[s->pos] >= '0' && str[s->pos] <= '9')
         s->pos++;
+
+        
     
     //debug_struct(s, 1);
 }

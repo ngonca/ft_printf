@@ -54,6 +54,8 @@ typedef	struct	s_ft_printf
     char            *save_s;
     void            *save_p;
 }               t_ft_printf;
+
+int     check_spec(const char *str);
 int     check_error(t_ft_printf *s, const char *str);
 void    reset(t_ft_printf *s);
 void    parse_c(t_ft_printf *s);

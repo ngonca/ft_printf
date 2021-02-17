@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 09:57:11 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/01/16 15:11:23 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/02/17 13:51:33 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ int ft_printf(const char *s, ...)
     while(s[l.pos])
     {
         reset(&l);
+    
         if(s[l.pos] == '%')
         {
+        if(!(check_spec(s)))
+            return(0);
             l.pos++;
             parse_flag(s, &l, &va);
             l.return_value += parse(s, &va, &l);

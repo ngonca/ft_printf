@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   detect_conv.c                                    .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: nigoncal <nigoncal@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/02/03 15:06:20 by nigoncal     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/03 15:54:03 by nigoncal    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   detect_conv.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/03 15:06:20 by nigoncal          #+#    #+#             */
+/*   Updated: 2021/02/17 10:50:39 by nigoncal         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int		detect_conv(char c)
@@ -35,6 +35,8 @@ int		check_error (t_ft_printf *s, const char *str)
 	else if(detect_conv(str[s->pos]))
 		return(1);
 	else if (str[s->pos] >= '0' && str[s->pos] <= '9')
+		return(1);
+	else if(str[s->pos] == '\0')
 		return(1);
 	else
 		return(0);
