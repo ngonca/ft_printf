@@ -10,11 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
 #include <stdio.h>
 #include <stdarg.h>
-
 
 int     parse(const char *str, va_list *a, t_ft_printf *s)
 {

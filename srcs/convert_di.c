@@ -1,4 +1,4 @@
-    #include "ft_printf.h"
+#include "ft_printf.h"
 
 int     convert( t_ft_printf *s)
 {
@@ -111,7 +111,7 @@ void    revers_nb(t_ft_printf *s)
                     s->nb_zero--;
                     if(s->flag_negative == 0) 
                print_space(s);
-             //   write(1, "-", 1);
+                write(1, "-", 1);
                 s->return_value++;
 }
 

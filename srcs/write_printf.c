@@ -21,14 +21,14 @@ void	ft_putchar_fd(char c, int fd)
 int     ft_putstr_precision(char *s, int precision) // prend en param une precision si celle ci est negative le resultat est un putstr simple
 {
     int i;
-        i = 0;
-        if(precision < 0)
-            return(0);
-            while(precision != i && s[i] != '\0')
-            {
-                write(1, &s[i], 1);
-                i++;
-            }
+    i = 0;
+    if (precision < 0)
+        return(0);
+    while(precision != i && s[i] != '\0')
+    {
+        write(1, &s[i], 1);
+        i++;
+    }
     
     return(i);
 }
@@ -57,15 +57,11 @@ void	ft_putnbr_fd(int n, int fd)
 }
 void 	ft_putnbr_fd_u(unsigned int n, int fd)
 {
-
-		if (n < 0)
-		{
-			ft_putchar_fd('-', fd);
-			n = n * -1;
-		}
-		if (n >= 10)
-			ft_putnbr_fd((n / 10), fd);
-		ft_putchar_fd(n % 10 + 48, fd);
+	ft_putchar_fd('-', fd);
+	n = n * -1;
+	if (n >= 10)
+		ft_putnbr_fd((n / 10), fd);
+	ft_putchar_fd(n % 10 + 48, fd);
 }
 
 

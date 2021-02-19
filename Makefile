@@ -1,45 +1,50 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/10/28 15:49:47 by nigoncal          #+#    #+#              #
-#    Updated: 2021/01/13 12:28:14 by nigoncal         ###   ########lyon.fr    #
-#                                                                              #
-# **************************************************************************** #
+.PHONY: all clean fclean re
 
+# Name of file
+NAME		=	libftprintf.a
 
-NAME = libftprintf.a
+# Name directory
+PATH_INC	=	includes
+PATH_SRC	=	srcs
+PATH_OBJ	=	objs
 
-HEADER = ft_printf.h 
+# List of sources
+SRCS		=	$(addprefix $(PATH_SRC)/, convert_di.c detect_conv.c ft_printf.c init_struct.c parse.c parse_flag.c print_flag.c processing_printf.c write_printf.c)
+OBJS		=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRCS:.c=.o)))
+INCS		=	$(addprefix $(PATH_INC)/, ft_printf.h)
 
-SRC = write_printf.c\
-processing_printf.c\
-ft_printf.c\
-parse.c\
-detect_conv.c\
-print_flag.c\
-parse_flag.c\
-convert_di.c\
-init_struct.c\
+# Commands of compilation
+COMP		=	clang
+COMP_FLAG	=	-Wall -Werror -Wextra
+COMP_ADD	=	-I$(PATH_INC)
 
-OBJS	= $(SRC:.c=.o)
+# Others Command
+RM			=	/bin/rm
 
-FLAG = -Wall -Wextra -Werror
+# Color Code and template code
+_YELLOW		=	\e[38;5;184m
+_GREEN		=	\e[38;5;46m
+_RESET		=	\e[0m
+_INFO		=	[$(_YELLOW)INFO$(_RESET)]
+_SUCCESS	=	[$(_GREEN)SUCCESS$(_RESET)]
 
-all : $(NAME)
+# Functions
+all:	init $(NAME)
+	@ echo "$(_SUCCESS) Compilation done"
 
-$(NAME) :	$(OBJS)
-	ar rc $(NAME) $(OBJS)
+init:
+	@ $(shell mkdir -p $(PATH_OBJ))
 
-%.o:%.c $(HEADER)
-	gcc $(FLAG) -o $@ -c $< -I $(HEADER)
-clean :
-	/bin/rm -f $(OBJS)
+$(NAME): $(OBJS) $(INCS)
+	ar rcs $(NAME) $(OBJS)
 
-fclean : clean
-	/bin/rm -f $(NAME)
+$(PATH_OBJ)/%.o : $(PATH_SRC)/%.c $(INCS)
+	$(COMP) $(COMP_FLAG) $(COMP_ADD) -c $< -o $@
+
+clean:
+	@ $(RM) -rf $(PATH_OBJ)
+
+fclean: clean
+	@ $(RM) -rf $(NAME)
 
 re: fclean all

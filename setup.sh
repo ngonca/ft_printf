@@ -1,0 +1,9 @@
+make -C printfTester d > result_d.txt
+make -C printfTester i > result_i.txt
+make -C printfTester u > result_u.txt
+make -C printfTester x > result_x.txt
+make -C printfTester X > result_X.txt
+make -C printfTester c > result_c.txt
+make -C printfTester s > result_s.txt
+make -C printfTester p > result_p.txt
+make -C printfTester % > result_%.txt

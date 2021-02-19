@@ -1,7 +1,7 @@
 #include "ft_printf.h"
 int     parse_flag(const char *str, t_ft_printf *s, va_list *a)
 {
-   
+
      while(!(detect_conv(str[s->pos])) && str[s->pos] != '\0')
     {
         if(str[s->pos + 1] == '*' || str[s->pos] == '*')

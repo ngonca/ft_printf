@@ -10,21 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
 
-    
 int ft_printf(const char *s, ...)
 {
-
+	int			pos;
+	int 		retv;
     t_ft_printf l;
-    va_list va;
+    va_list		va;
+
     va_start(va, s);
-    init_struct(&l);
+    pos = 0;
+    retv = 0;
+    l = (t_ft_printf) {.pos = 0};
     while(s[l.pos])
     {
-        reset(&l);
-    
+    	l = (t_ft_printf) {.pos = pos, .return_value = retv};
         if(s[l.pos] == '%' && (check_spec(s)))
         {
             l.pos++;
@@ -39,7 +40,8 @@ int ft_printf(const char *s, ...)
             l.return_value++;
             l.pos++;
         }
-
+		pos = l.pos;
+        retv = l.return_value;
     }
        
     return(l.return_value);

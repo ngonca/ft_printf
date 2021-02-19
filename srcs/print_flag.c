@@ -1,4 +1,4 @@
-#include"ft_printf.h"
+#include "ft_printf.h"
 
 void print_space(t_ft_printf *s)
 {
