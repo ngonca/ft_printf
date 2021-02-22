@@ -18,10 +18,19 @@ int     parse_flag(const char *str, t_ft_printf *s, va_list *a)
         {   
             s->pos++;
             s->flag_negative = 1;
-              if(str[s->pos] == '*')
+            if(str[s->pos] == '0')
+                s->pos++;
+            if(str[s->pos] == '*')
+            {
                     s->nb_space = va_arg(*a, int);
+    if(s->nb_space < 0)
+        s->nb_space *= -1;
+       
+            }
             else
                 s->nb_space = ft_atoi(&str[s->pos]);
+
+
         }
          if(str[s->pos] == '0')
         {
@@ -49,6 +58,7 @@ int     parse_flag(const char *str, t_ft_printf *s, va_list *a)
             if(!(check_error(s, str)) && str[s->pos] != '\0')
             return(0);
     }
+   // debug_struct(s,1);
 
 if(s->flag_asterix != 0)
     parse_asterix(s); 
@@ -61,7 +71,6 @@ void    parse_precision(const char *str, t_ft_printf *s, va_list *a)
 
     s->flag_precision = 1;
     s->pos++;
-
 if(s->flag_zero != 0 && s->nb_zero != 0)
 {
         s->flag_zero = 0;
@@ -71,6 +80,7 @@ if(s->flag_zero != 0 && s->nb_zero != 0)
 }
     if((str[s->pos] >= '0' && str[s->pos] <= '9') || str[s->pos] == '*')
     {
+
         if(s->nb_zero == 0)
         {
              if(str[s->pos] == '*')

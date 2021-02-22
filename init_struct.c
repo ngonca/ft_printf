@@ -3,9 +3,8 @@
 void    init_struct(t_ft_printf *s)
 {
     s->pos = 0;
-    s->error = 0;
     s->return_value = 0;
-
+    s->format = 0;
 	s->flag_negative = 0;
 	s->flag_asterix = 0;
     s->flag_precision = 0;

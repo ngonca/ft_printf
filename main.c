@@ -8,13 +8,11 @@ int main ()
     int as = 0;
     int t = 50;
     int u = 10;
-
-      as = ft_printf("vrai : %-.50d\n", INT_MIN);
-   printf("return value : [%d]\n", as);
-      as = printf("faux : %-.50d\n", INT_MIN);
-    printf("return value : [%d]\n", as);
     
-
+      as = ft_printf("faux : %-.5d\n", -21);
+   printf("return value : [%d]\n", as);
+      as = printf("vrai : %-.5d\n", -21);
+   printf("return value : [%d]\n", as);
 
 }  
 
