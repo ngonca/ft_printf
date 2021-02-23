@@ -6,14 +6,11 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:41:42 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/02/23 12:04:59 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/02/23 15:27:47 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
-
-
 
 static int
 	protect_atoi(long int result, int is_negative)
@@ -54,8 +51,8 @@ int
 	return (protect_atoi(result, is_negative));
 }
 
-
-int		get_size(t_ft_printf *s)
+int
+	get_size(t_ft_printf *s)
 {
 	int value;
 
@@ -77,8 +74,8 @@ int		get_size(t_ft_printf *s)
 	return (0);
 }
 
-
-void	ft_putnbr_base_l(unsigned long cast, char *base, unsigned int blen)
+void
+	ft_putnbr_base_l(unsigned long cast, char *base, unsigned int blen)
 {
 	if (cast < 0)
 		cast = -cast;
@@ -89,4 +86,16 @@ void	ft_putnbr_base_l(unsigned long cast, char *base, unsigned int blen)
 		ft_putnbr_base(cast / blen, base, blen);
 		write(1, &base[cast % blen], 1);
 	}
+}
+
+void
+	revers_nb(t_ft_printf *s)
+{
+	s->save_d *= -1;
+	if (s->nb_zero != 0)
+		s->nb_zero--;
+	if (s->flag_negative == 0)
+		print_space(s);
+	write(1, "-", 1);
+	s->return_value++;
 }

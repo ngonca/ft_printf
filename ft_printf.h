@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:21:04 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/02/23 12:08:28 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/02/23 15:51:28 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <stdarg.h>
 # include <limits.h>
 
-int					ft_printf(const char *s, ...) __attribute__((format(printf,1,2)));
+int					ft_printf(const char *s, ...)
+					 __attribute__((format(printf,1,2)));
 void				ft_putnbr_fd(int n, int fd);
 int					ft_strlen_int_u(unsigned int nb);
 int					ft_strlen_int (int nb);
@@ -52,7 +53,11 @@ typedef	struct		s_ft_printf
 	char			*save_s;
 	void			*save_p;
 }					t_ft_printf;
-void 				print_nb2 (t_ft_printf *s);
+void				parse_flag3(const char *str, t_ft_printf *s, va_list *a);
+void				parse_flag2(const char *str, t_ft_printf *s, va_list *a);
+void				print_precision(t_ft_printf *s);
+void				precision2(t_ft_printf *s);
+void				print_nb2(t_ft_printf *s);
 void				format_excep2(t_ft_printf *s);
 int					format_error(t_ft_printf *s);
 void				format_excep(t_ft_printf *s);
@@ -61,10 +66,12 @@ void				init_struct(t_ft_printf *s);
 int					check_error(t_ft_printf *s, const char *str);
 void				parse_c(t_ft_printf *s);
 void				parse_asterix (t_ft_printf *s);
-void				ft_putnbr_base_l(unsigned long cast, char *base, unsigned int blen);
+void				ft_putnbr_base_l(unsigned long cast, char *base,
+									unsigned int blen);
 int					ft_strlen_p(t_ft_printf *s);
 int					ft_strlen_x(t_ft_printf *s);
-void				parse_precision(const char *str, t_ft_printf *s, va_list *a);
+void				parse_precision(const char *str,
+									t_ft_printf *s, va_list *a);
 void				print_nb(t_ft_printf *s);
 int					get_size(t_ft_printf *s);
 int					detect_flag(t_ft_printf *s);

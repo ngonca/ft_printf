@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_len.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/23 14:39:54 by nigoncal          #+#    #+#             */
+/*   Updated: 2021/02/23 15:03:44 by nigoncal         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	int i;
 
@@ -56,9 +67,10 @@ int		ft_strlen_int_u(unsigned int nb)
 	}
 	return (i);
 }
+
 int		ft_strlen_x(t_ft_printf *s)
 {
-	int 			value;
+	int				value;
 	unsigned int	temp;
 
 	value = 0;

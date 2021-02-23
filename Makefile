@@ -6,7 +6,7 @@
 #    By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/28 15:49:47 by nigoncal          #+#    #+#              #
-#    Updated: 2021/02/23 12:13:37 by nigoncal         ###   ########lyon.fr    #
+#    Updated: 2021/02/23 15:53:55 by nigoncal         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ parse_flag.c\
 convert_di.c\
 init_struct.c\
 get_len.c\
+format.c\
 
 OBJS	= $(SRC:.c=.o)
 

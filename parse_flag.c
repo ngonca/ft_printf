@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:29:47 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/02/23 10:35:47 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/02/23 15:40:52 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,49 +26,59 @@ int		parse_flag(const char *str, t_ft_printf *s, va_list *a)
 			else
 				s->nb_space = ft_atoi(&str[s->pos]);
 		}
-		if (str[s->pos] == '-')
-		{
-			s->pos++;
-			s->flag_negative = 1;
-			if (str[s->pos] == '0')
-				s->pos++;
-			if (str[s->pos] == '*')
-			{
-				s->nb_space = va_arg(*a, int);
-				if (s->nb_space < 0)
-					s->nb_space *= -1;
-			}
-			else
-				s->nb_space = ft_atoi(&str[s->pos]);
-		}
-		if (str[s->pos] == '0')
-		{
-			s->flag_zero = 1;
-			if (str[s->pos + 1] == '*')
-				s->nb_zero = va_arg(*a, int);
-			else
-				s->nb_zero = ft_atoi(&str[s->pos]);
-			s->detect_char = 1;
-			s->pos++;
-		}
-		if (s->flag_zero == 1 && s->flag_negative == 1)
-		{
-			s->flag_zero = 0;
-			s->nb_zero = 0;
-			s->detect_char = 0;
-		}
-		if (str[s->pos] == '*')
-			s->pos++;
-		while ((str[s->pos] >= '0' && str[s->pos] <= '9'))
-			s->pos++;
-		if (str[s->pos] == '.')
-			parse_precision(str, s, a);
+		parse_flag2(str, s, a);
+		parse_flag3(str, s, a);
 		if (!(check_error(s, str)) && str[s->pos] != '\0')
 			return (0);
 	}
 	if (s->flag_asterix != 0)
 		parse_asterix(s);
 	return (0);
+}
+
+void	parse_flag2(const char *str, t_ft_printf *s, va_list *a)
+{
+	if (str[s->pos] == '-')
+	{
+		s->pos++;
+		s->flag_negative = 1;
+		if (str[s->pos] == '0')
+			s->pos++;
+		if (str[s->pos] == '*')
+		{
+			s->nb_space = va_arg(*a, int);
+			if (s->nb_space < 0)
+				s->nb_space *= -1;
+		}
+		else
+			s->nb_space = ft_atoi(&str[s->pos]);
+	}
+	if (str[s->pos] == '0')
+	{
+		s->flag_zero = 1;
+		if (str[s->pos + 1] == '*')
+			s->nb_zero = va_arg(*a, int);
+		else
+			s->nb_zero = ft_atoi(&str[s->pos]);
+		s->detect_char = 1;
+		s->pos++;
+	}
+}
+
+void	parse_flag3(const char *str, t_ft_printf *s, va_list *a)
+{
+	if (s->flag_zero == 1 && s->flag_negative == 1)
+	{
+		s->flag_zero = 0;
+		s->nb_zero = 0;
+		s->detect_char = 0;
+	}
+	if (str[s->pos] == '*')
+		s->pos++;
+	while ((str[s->pos] >= '0' && str[s->pos] <= '9'))
+		s->pos++;
+	if (str[s->pos] == '.')
+		parse_precision(str, s, a);
 }
 
 void	parse_precision(const char *str, t_ft_printf *s, va_list *a)
@@ -119,20 +129,5 @@ void	parse_asterix(t_ft_printf *s)
 	{
 		s->flag_zero = 1;
 		s->flag_nb = 0;
-	}
-}
-
-void	debug_struct(t_ft_printf *s, int etat)
-{
-	if (etat == 1)
-	{
-		printf("\n-- TESTS STRUCT PARSE --\n\n");
-		printf("s->flag_zero : %d\n", s->flag_zero);
-		printf("s->flag_negative : %d\n", s->flag_negative);
-		printf("s->flag_precision : %d \n", s->flag_precision);
-		printf("s->flag_nb : %d \n", s->flag_nb);
-		printf("s->flag_asterix : %d \n\n", s->flag_asterix);
-		printf("s->nb_space : %d\n", s->nb_space);
-		printf("s->nb_zero : %d \n\n", s->nb_zero);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:08:04 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/02/23 11:51:19 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/02/23 15:28:50 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	print_nb(t_ft_printf *s)
 		print_nb2(s);
 }
 
-void print_nb2 (t_ft_printf *s)
+void	print_nb2(t_ft_printf *s)
 {
-	 if (s->format == 'd' || s->format == 'i')
+	if (s->format == 'd' || s->format == 'i')
 	{
 		if (s->save_d < 0)
 		{
