@@ -6,7 +6,7 @@
 /*   By: nigoncal <nigoncal@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 14:35:12 by nigoncal          #+#    #+#             */
-/*   Updated: 2021/02/23 14:37:52 by nigoncal         ###   ########lyon.fr   */
+/*   Updated: 2021/02/24 11:37:11 by nigoncal         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	format_excep(t_ft_printf *s)
 	if (s->flag_precision == 1 && s->flag_negative == 1 && s->nb_space == 0)
 		s->flag_negative = 0;
 	if (s->flag_precision == 1 && s->detect_char == 1
-		&& s->nb_zero < 0 && s->nb_space > 0)
+			&& s->nb_zero < 0 && s->nb_space > 0)
 		s->nb_zero = s->nb_space;
 	if (s->format == 's' && s->flag_zero == 1 && s->flag_precision == 0)
 	{
@@ -25,13 +25,13 @@ void	format_excep(t_ft_printf *s)
 		s->nb_zero = 0;
 	}
 	if (s->nb_zero > ft_strlen_int(s->save_d) && s->save_d == INT_MIN
-		&& (s->format == 'd' || s->format == 'i'))
+			&& (s->format == 'd' || s->format == 'i'))
 	{
 		s->nb_zero++;
 		s->return_value--;
 	}
 	if (s->flag_precision != 0 && s->save_p == 0
-		&& s->nb_space > 2 && s->format == 'p')
+			&& s->nb_space > 2 && s->format == 'p')
 	{
 		s->return_value--;
 		s->nb_space++;
@@ -41,10 +41,18 @@ void	format_excep(t_ft_printf *s)
 
 void	format_excep2(t_ft_printf *s)
 {
-	if (s->format == 'c')
-		parse_c(s);
+	if (s->flag_precision == 1 && s->format != 's')
+	{
+		if (s->nb_zero != 0 && s->flag_nb == 0)
+			s->flag_zero = 1;
+		else
+			s->flag_nb = 1;
+		if (s->save_d < 0 && s->nb_zero != 0
+				&& s->format != 'x' && s->format != 'X')
+			s->nb_zero++;
+	}
 	if (s->nb_space == 0 && s->nb_zero == 0
-		&& s->flag_zero == 1 && s->flag_precision == 1)
+			&& s->flag_zero == 1 && s->flag_precision == 1)
 		s->flag_zero = 0;
 	if (s->format == 's' && s->nb_zero < 0 && s->nb_space != 0)
 	{
@@ -52,10 +60,8 @@ void	format_excep2(t_ft_printf *s)
 			s->return_value += get_size(s) - s->nb_space;
 	}
 	if (s->flag_precision == 1 && s->save_p == NULL
-		&& s->format == 'p' && s->nb_space == 0 && s->nb_zero == 0)
+			&& s->format == 'p' && s->nb_space == 0 && s->nb_zero == 0)
 		s->return_value--;
-	if (s->format == '%')
-		s->format = 'c';
 	if (s->nb_zero < 0 && s->format == 's')
 		s->nb_zero = ft_strlen(s->save_s);
 }
@@ -63,13 +69,13 @@ void	format_excep2(t_ft_printf *s)
 int		format_error(t_ft_printf *s)
 {
 	if (s->format == 'u' && s->save_u == 0
-		&& s->flag_precision == 1 && s->nb_zero == 0)
+			&& s->flag_precision == 1 && s->nb_zero == 0)
 	{
 		s->return_value += s->nb_space;
 		return (0);
 	}
 	else if (s->flag_precision == 1 && s->save_d == 0 && s->nb_zero == 0
-		&& s->format != 'u' && s->format != 'p' && s->format != 'c')
+			&& s->format != 'u' && s->format != 'p' && s->format != 'c')
 	{
 		s->return_value += s->nb_space;
 		return (0);
